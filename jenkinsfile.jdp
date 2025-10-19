@@ -1,14 +1,14 @@
 pipeline {
     agent any
-    stage {
+    stages {
         stage('pull'){
             steps{
                 git branch: 'main', url: 'https://github.com/komaljadhav116/ci-cd-pipeline.git'
             }
         }  
 
-       stage('Build and Push') {
-            steps {
+        stage('Build and Push') {
+            steps{
                 withCredentials([string(credentialsId: 'dockerhub-token', variable: 'DOCKER_TOKEN')]) {
                     sh '''
                         docker build -t komal0116/ci-cd-pipeline:latest  .
@@ -21,7 +21,7 @@ pipeline {
         }
 
         stage(deploy){
-            step{
+            steps{
                 sh ''' 
                 mkdir ~/.kube
                 cp .kubeconfig ~/.kube/config
