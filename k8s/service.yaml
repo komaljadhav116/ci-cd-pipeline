@@ -6,6 +6,6 @@ spec:
   selector:
     app: ci-cd-pipeline   
   ports:
-    - protocol: TCP
+    - protocol: TCp
       port: 8080          
       targetPort: 8080    
