@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ci-cd-pipeline        
+  labels:                    
+    app: ci-cd-pipeline
+spec:
+  replicas: 1
+  selector:
+    matchLabels:             
+      app: ci-cd-pipeline
+  template:
+    metadata:
+      labels:
+        app: ci-cd-pipeline
+    spec:
+      containers:
+        - name: ci-cd-container
+          image: komal0116/ci-cd-pipeline-app
+          ports:
+            - containerPort: 8080
