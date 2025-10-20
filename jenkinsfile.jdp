@@ -14,6 +14,7 @@ pipeline {
                         docker build -t komal0116/ci-cd-pipeline:latest  .
                         echo $DOCKER_TOKEN | docker login -u komal0116 --password-stdin
                         docker push komal0116/ci-cd-pipeline:latest
+                        docker rmi komal0116/ci-cd-pipeline:latest
                         docker logout
                     '''
                 }
@@ -24,7 +25,7 @@ pipeline {
             steps{
                 sh ''' 
                 kubectl config current-context
-                kubectl apply -f ./k8s
+                kubectl apply -f ./k8s/
                 kubectl get pods
              '''
             }
