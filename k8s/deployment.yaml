@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
         - name: ci-cd-container
-          image: komal0116/ci-cd-pipeline-app
+          image: komal0116/ci-cd-pipeline-app:latest
           ports:
             - containerPort: 8080

@@ -1,13 +1,13 @@
 pipeline {
     agent any
     stages {
-        stage('pull'){
+        stage("pull"){
             steps{
                 git branch: 'main', url: 'https://github.com/komaljadhav116/ci-cd-pipeline.git'
             }
         }  
 
-        stage('Build and Push') {
+        stage("Build and Push") {
             steps{
                 withCredentials([string(credentialsId: 'dockerhub-token', variable: 'DOCKER_TOKEN')]) {
                     sh '''
@@ -20,14 +20,12 @@ pipeline {
             }
         }
 
-        stage(deploy){
+        stage("deploy to minikube"){
             steps{
                 sh ''' 
-                mkdir ~/.kube
-                cp .kubeconfig ~/.kube/config
-                chmod -R 777 ~/.kube
                 kubectl config current-context
                 kubectl apply -f ./k8s
+                kubectl get pods
              '''
             }
         }
